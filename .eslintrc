@@ -4,7 +4,25 @@
     "node": true,
     "es6": true
   },
-  "rules": {
+ "rules": {
+    "no-unused-vars": [
+      2,
+      {
+        "args": "none",
+        "argsIgnorePattern": "React"
+      }
+    ],
+    "no-mixed-spaces-and-tabs": [
+      0,
+      "smart-tabs"
+    ],
+    "func-style": [
+      0,
+      "declaration"
+    ],
+    "new-cap": [
+      0
+    ],
     "quotes": [
       2,
       "single",
