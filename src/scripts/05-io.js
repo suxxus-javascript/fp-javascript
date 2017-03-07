@@ -8,6 +8,7 @@
 
 const fs = require('fs');
 const IO = require('ramda-fantasy').IO;
+const identity = require('ramda-fantasy').Identity;
 
 // :: String -> IO String
 const readFile = (filename) =>
@@ -32,7 +33,6 @@ console.log(
          (data) => IO(() => process.stdout.write(data[0]))
      )
     .runIO()
-);
-
+); // => /home/diego/.nvm/versions/node/v6.9.1/bin/nodetrue
 
 }());
