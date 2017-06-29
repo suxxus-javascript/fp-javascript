@@ -20,23 +20,23 @@ const fork = curry((rej, res, mma) => mma.fork(rej, res));
 (function() {
     // :: ((e -> (), a -> ()) -> ()) -> Future e a
     Future((reject, resolve) => {
-            setTimeout(() => resolve('ok'), 1000);
-        })
+        setTimeout(() => resolve('ok'), 1000);
+    })
         .fork(log, log);
 
     Future((reject, resolve) => {
-            const file = path.resolve(__dirname, 'test.json');
+        const file = path.resolve(__dirname, 'test.json');
 
-            fs.readFile(file, 'utf8', (err, data) => {
+        fs.readFile(file, 'utf8', (err, data) => {
 
-                if (err) {
-                    reject(err.message);
-                    return;
-                }
+            if (err) {
+                reject(err.message);
+                return;
+            }
 
-                resolve(data);
-            });
-        })
+            resolve(data);
+        });
+    })
         .map((result) => JSON.parse(result))
         .map((data) => `user is: ${data.user}`)
         .fork(log, log);
@@ -44,11 +44,11 @@ const fork = curry((rej, res, mma) => mma.fork(rej, res));
 
 (function() {
     Future((reject, resolve) => {
-            fetch('http://date.jsontest.com')
+        fetch('http://date.jsontest.com')
                 .then((r) => {
                     r.json().then(resolve);
                 }, reject);
-        })
+    })
         .fork((err) => {
             log('error -->', err.message);
         }, (data) => {
