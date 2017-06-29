@@ -9,7 +9,7 @@
   "license": "ISC",
   "description": "functional-paradigm-studies",
   "scripts": {
-    "lint": "eslint --color ./src/scripts/**/* || true",
+    "lint": "eslint --color --fix ./src/scripts/**/*.js || true",
     "test": "NODE_PATH=src tape src/tests | tap-colorize",
     "dev": "watch -p 'src/**/*.js' -c 'npm test & npm run lint'",
     "check": "npm outdated --depth=0",
