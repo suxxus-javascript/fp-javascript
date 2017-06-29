@@ -23,3 +23,6 @@ The `package.json` file comes with the following scripts
 
 ## Books
 [drboolean > mostly-adequate-guide](https://www.gitbook.com/book/drboolean/mostly-adequate-guide/details)
+
+## Links
+[Javascript Functor, Applicative, Monads in pictures](https://medium.com/@tzehsiang/javascript-functor-applicative-monads-in-pictures-b567c6415221)
