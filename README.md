@@ -11,6 +11,7 @@ npm install
 
 ## Usage
 cd ./src/scripts
+
 node `<name of the file>`
 
 ## Scripts
