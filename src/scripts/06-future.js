@@ -1,49 +1,92 @@
-(function() {
+'use strict';
+const path = require('path');
+const fs = require('fs');
+const fetch = require('node-fetch');
+const { Future } = require('ramda-fantasy');
+const { compose, curry, join, map, split, toUpper } = require('ramda');
+const log = console.log.bind(console);
+const fork = curry((rej, res, mma) => mma.fork(rej, res));
 
 // The Future type is used to represent some future,
 // often asynchronous, action that may potentially fail.
 
-    const fs = require('fs');
-    const fetch = require('node-fetch');
-    const Future = require('ramda-fantasy').Future;
-
-    // :: ((e -> (), a -> ()) -> ()) -> Future e a
-    Future((reject, resolve) => {
-            setTimeout(() => resolve('ok'), 1000)
-        })
-        .fork(console.log, console.log);
-
+(function() {
     // :: a -> Future e a
     Future.of(1)
-         .map(x => x + 1)
-         .fork(console.log, console.log);
+        .map(x => x + 1)
+        .fork(log, log);
+}());
+
+(function() {
+    // :: ((e -> (), a -> ()) -> ()) -> Future e a
+    Future((reject, resolve) => {
+        setTimeout(() => resolve('ok'), 1000);
+    })
+        .fork(log, log);
 
     Future((reject, resolve) => {
-            fs.readFile('test.json', 'utf8', (err, data) => {
+        const file = path.resolve(__dirname, 'test.json');
 
-                if (err) {
-                    reject(err.message);
-                    return;
-                }
+        fs.readFile(file, 'utf8', (err, data) => {
 
-                resolve(data);
-            })
-        })
+            if (err) {
+                reject(err.message);
+                return;
+            }
+
+            resolve(data);
+        });
+    })
         .map((result) => JSON.parse(result))
         .map((data) => `user is: ${data.user}`)
-        .fork(console.log, console.log);
+        .fork(log, log);
+}());
 
-
+(function() {
     Future((reject, resolve) => {
-            fetch('http://date.jsontest.com')
+        fetch('http://date.jsontest.com')
                 .then((r) => {
                     r.json().then(resolve);
                 }, reject);
-        })
+    })
         .fork((err) => {
-            console.log('error -->', err.message);
+            log('error -->', err.message);
         }, (data) => {
-            console.log(data);
+            log(data);
         });
+}());
 
+(function() {
+    let state = {};
+
+    const delay = ms =>
+        ms >= 1000 ? Promise.reject(new Error('error: ms is too long')) : Promise.resolve('hello world');
+
+    const reduceGreet = curry((st, greet) => Object.assign({}, st, { greet }));
+
+    const f = Future((reject, resolve) => {
+        delay(900).then(resolve).catch(reject);
+    });
+
+    const logError = ({ message }) => {
+        log(message);
+    };
+
+    const setState = obj => {
+        state = obj;
+    };
+
+    const greetToUpperCase = compose(
+        fork(logError, setState),
+        map(reduceGreet(state)),
+        map(toUpper),
+        map(join('-')),
+        map(split(' '))
+    );
+
+    greetToUpperCase(f);
+
+    setTimeout(() => {
+        log(state);
+    }, 1000);
 }());
