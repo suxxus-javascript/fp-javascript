@@ -2,7 +2,7 @@
 
 (function() {
     const Identity = require('ramda-fantasy').Identity;
-    const { head, map, toUpper } = require('ramda');
+    const { head, map } = require('ramda');
 
     const add = (a) => (b) => a + b;
     var xs = Identity.of(['do', 'ray', 'me', 'fa', 'so', 'la', 'ti', 'do']);
@@ -30,4 +30,4 @@
         .toString()
     ); // => Identity(5)
 
-}())
+}());
