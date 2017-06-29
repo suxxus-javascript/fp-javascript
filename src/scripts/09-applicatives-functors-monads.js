@@ -1,22 +1,11 @@
 'use strict';
 
 const Maybe = require('ramda-fantasy').Maybe;
-const Identity = require('ramda-fantasy').Identity;
-const E = require('ramda-fantasy').Either;
-const IO = require('ramda-fantasy').IO;
-const { identity, isNil, curry, compose, map, inc, add, toUpper, toString } = require('ramda');
+const { map, inc, identity, add, toUpper } = require('ramda');
 
 const Just = Maybe.Just;
-const Right = E.Right;
-const Left = E.Left;
-const either = E.either;
-const isNothing = Maybe.isNothing;
 
 //  join :: Monad m => m (m a) -> m a
-const chain = function(mma) {
-    return mma.chain(x => x);
-};
-
 const print = console.log.bind(console);
 
 (function() {
