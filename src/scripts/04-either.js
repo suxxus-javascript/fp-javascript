@@ -80,4 +80,13 @@
         E.either(handleLeft, handleRight, getValue(1))
     ); // Right => 1
 
+
+
+    const getValue2 = (value) =>
+        isNil(value) ? Left(console.log('value is undefined')) : Right(value);
+
+
+    getValue2(() => console.log('xs'))
+        .map(x => x());
+
 }());
