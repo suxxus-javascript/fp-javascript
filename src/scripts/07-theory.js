@@ -23,7 +23,7 @@
 
     console.log(
         bottomRoute('hi')
-        // Maybe('ih'
+        // Maybe('ih')
     );
 
     const nested = Future.of([Right('pillows'), Left('no sleep for you')]);
