@@ -1,7 +1,7 @@
 'use strict';
 
 const Maybe = require('ramda-fantasy').Maybe;
-const { isNil } = require('ramda');
+const { isEmpty, isNil } = require('ramda');
 
 (function() {
 
@@ -12,6 +12,13 @@ const { isNil } = require('ramda');
 
     const Just = Maybe.Just;
     const Nothing = Maybe.Nothing;
+
+    console.log(
+        Maybe('')
+        .chain(x => isEmpty(x) ? Nothing() : Just(x) )
+        .map(x => x + 'world')
+        .toString()
+    );
 
     console.log(
         Maybe(1)
