@@ -58,7 +58,7 @@ const print = console.log.bind(console);
         .chain(identity)
         .map(foo)
         .toString()
-    ); // Maybe.Just(8)
+    ); // Maybe.Just(Maybe.Just(2))
 
 }());
 
