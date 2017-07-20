@@ -1,13 +1,34 @@
 'use strict';
 
-const Maybe = require('ramda-fantasy').Maybe;
-const { map, inc, identity, add, toUpper } = require('ramda');
+const { Maybe, Either } = require('ramda-fantasy');
+const { map, inc, isNil, identity, add, toUpper } = require('ramda');
 
 const Just = Maybe.Just;
+const E = Either;
+const Left = E.Left;
+const Right = E.Right;
 
 //  join :: Monad m => m (m a) -> m a
 const print = console.log.bind(console);
 
+/*
+
+1. A functor is a type that implements map.
+2. An applicative is a type that implements ap.
+3. A monad is a type that implements flatMap.
+
+Array implements map, so it’s a functor.
+Promise implements map and flatMap through then, so it is a functor and a monad.
+
+*/
+
+/*
+
+1. functors: you apply a function to a wrapped value.
+2. applicatives: you apply a wrapped function to a wrapped value.
+3. monads: you apply a function that returns a wrapped value, to a wrapped value.
+
+*/
 (function() {
     const incrementListVals = map(inc);
 
@@ -64,19 +85,28 @@ const print = console.log.bind(console);
 
 /*
 
-1. A functor is a type that implements map.
-2. An applicative is a type that implements ap.
-3. A monad is a type that implements flatMap.
-
-Array implements map, so it’s a functor.
-Promise implements map and flatMap through then, so it is a functor and a monad.
+  Either Monads are great for dealing with multiple functions
+  when they all can potentially throw error and want to quit
+  immediately after an error
 
 */
+(function() {
 
-/*
+    const price = val =>
+        isNil(val) ? Left(new Error('price value must be numeric')) : Right(val);
 
-1. functors: you apply a function to a wrapped value.
-2. applicatives: you apply a wrapped function to a wrapped value.
-3. monads: you apply a function that returns a wrapped value, to a wrapped value.
+    const discount = dis => price =>
+        isNil(dis) ? Left(new Error('discount value must be numeric')) : Right(price - (price * dis));
 
-*/
+    const discount10Percent = (discount(0.1));
+
+    const handleLeft = error => print(`Error: ${error.message}`);
+    const handleRight = val => print(`your value is ${val}`);
+    const eitherLogOrShow = E.either(handleLeft, handleRight);
+
+    eitherLogOrShow(
+        price(100)
+        .chain(discount10Percent)
+    ); // => your value is 90
+
+}());
