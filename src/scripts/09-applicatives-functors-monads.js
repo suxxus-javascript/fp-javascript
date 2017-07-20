@@ -79,7 +79,7 @@ Promise implements map and flatMap through then, so it is a functor and a monad.
         .chain(identity)
         .map(foo)
         .toString()
-    ); // Maybe.Just(8)
+    ); // Maybe.Just(Maybe.Just(2))
 
 }());
 
