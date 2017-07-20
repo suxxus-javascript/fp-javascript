@@ -1,7 +1,7 @@
 'use strict';
 
 const { Maybe, Either } = require('ramda-fantasy');
-const { map, inc, isNil, identity, add, toUpper } = require('ramda');
+const { map, inc, concat, isNil, identity, add, toUpper } = require('ramda');
 
 const Just = Maybe.Just;
 const E = Either;
@@ -82,6 +82,20 @@ Promise implements map and flatMap through then, so it is a functor and a monad.
     ); // Maybe.Just(Maybe.Just(2))
 
 }());
+
+// applicatives: you apply a wrapped function to a wrapped value.
+(function(){
+
+  print(
+    Maybe(concat)
+      .ap(Just('A'))
+      .ap(Just('B'))
+      .toString()
+    ); // Just('AB')
+
+
+}());
+
 
 /*
 

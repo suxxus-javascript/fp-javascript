@@ -1,4 +1,4 @@
-'use strict';
+
 
 const Maybe = require('ramda-fantasy').Maybe;
 const Identity = require('ramda-fantasy').Identity;
