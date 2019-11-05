@@ -26,6 +26,8 @@ The `package.json` file comes with the following scripts
 
 ## Links
 
+[https://jrsinclair.com/articles/2019/what-i-wish-someone-had-explained-about-functional-programming/](https://jrsinclair.com/articles/2019/what-i-wish-someone-had-explained-about-functional-programming/)
+
 [ALGEBRAIC STRUCTURES: THINGS I WISH SOMEONE HAD EXPLAINED ABOUT FUNCTIONAL PROGRAMMING](https://jrsinclair.com/articles/2019/algebraic-structures-what-i-wish-someone-had-explained-about-functional-programming/)
 
 [Javascript Functor, Applicative, Monads in pictures](https://medium.com/@tzehsiang/javascript-functor-applicative-monads-in-pictures-b567c6415221)
