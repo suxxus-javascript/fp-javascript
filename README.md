@@ -21,6 +21,9 @@ The `package.json` file comes with the following scripts
 
 `lint`: lint all code.
 
+## Libraries
+[folktale](https://folktale.origamitower.com/)
+
 ## Books
 [drboolean > mostly-adequate-guide](https://www.gitbook.com/book/drboolean/mostly-adequate-guide/details)
 
