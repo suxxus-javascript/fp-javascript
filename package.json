@@ -28,7 +28,7 @@
     "functional paradigm"
   ],
   "dependencies": {
-    "node-fetch": "1.6.3",
+    "node-fetch": "2.6.1",
     "ramda": "0.23.0",
     "ramda-fantasy": "0.7.0"
   }
